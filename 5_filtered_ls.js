@@ -16,15 +16,12 @@ var path = require('path')
 var dir = process.argv[2]
 var ext = process.argv[3]
 
-var hasFileExt = function (filename) {
-  return path.extname(filename) === '.' + ext
-}
-
 fs.readdir(dir, function (err, files) {
   if (err) throw err;
-  files.forEach(function (file) {
-    if (hasFileExt(file)) {
-      console.log(file)
-    }
+
+  files.filter( function (filename) {
+    return path.extname(filename) === '.' + ext
+  }).forEach( function (filename) {
+    console.log(filename)
   })
 })
